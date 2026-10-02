@@ -1,5 +1,4 @@
 idf_component_register(SRCS
-    "example.cpp"
     "neopixel.cpp"
     "neopixel_i2s.cpp"
     INCLUDE_DIRS "")

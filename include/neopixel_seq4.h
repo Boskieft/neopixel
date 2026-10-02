@@ -3,7 +3,7 @@
 *****************************************************************************************
     Bitstream sequence for Neopixels that use 4 transmit bits ("seq4") per color bit.
 
-    Copyright (c) 2026 Erik Basalt. All rights reserved.
+    Copyright (c) 2026 Erik Boskieft. All rights reserved.
     This file is released under the MIT License. See the LICENSE file for details.
 *****************************************************************************************
 */

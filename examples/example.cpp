@@ -1,9 +1,11 @@
 /*
- * SPDX-FileCopyrightText: 2010-2022 Espressif Systems (Shanghai) CO LTD
- *
- * SPDX-License-Identifier: CC0-1.0
- */
+***************************************************************************************************
+    Example of using the ESP32xx Neopixel Driver
 
+    Copyright (c) 2026 Erik Boskieft. All rights reserved.
+    Released under the MIT License, see the LICENSE file for details.
+***************************************************************************************************
+*/
 #include <stdio.h>
 #include <string.h>
 #include "sdkconfig.h"
@@ -11,7 +13,7 @@
 #include "freertos/task.h"
 
 #include "driver/gpio.h"
-#include <esp_log.h>
+#include "esp_log.h"
 
 #include "neopixel.h"
 
@@ -32,54 +34,42 @@ inline constexpr PixelColor neopixelBackgroundColor = {.color = {.b = 0x10, .g =
 /*
 -------------------------------------------------------------------------------
     Set the GPIO pins based on the target chip selected when building
+
+    Should match your actual hardware (wiring) configuration, adapt as needed.
 -------------------------------------------------------------------------------
 */
 gpio_num_t dataPin = GPIO_NUM_NC;
 
-bool setGPIO(void)
-{
+bool setGPIO(void) {
     gpio_num_t enablePin = GPIO_NUM_NC;
-    if (strcmp(CONFIG_IDF_TARGET, "esp32") == 0)
-    {
+    if (strcmp(CONFIG_IDF_TARGET, "esp32") == 0) {
         dataPin = GPIO_NUM_19;
         enablePin = GPIO_NUM_26;
-    }
-    else if (strcmp(CONFIG_IDF_TARGET, "esp32s2") == 0)
-    {
+    } else if (strcmp(CONFIG_IDF_TARGET, "esp32s2") == 0) {
         dataPin = GPIO_NUM_9;
         enablePin = GPIO_NUM_5;
-    }
-    else if (strcmp(CONFIG_IDF_TARGET, "esp32s3") == 0)
-    {
+    } else if (strcmp(CONFIG_IDF_TARGET, "esp32s3") == 0) {
         dataPin = GPIO_NUM_17;
         enablePin = GPIO_NUM_16;
-    }
-    else if (strcmp(CONFIG_IDF_TARGET, "esp32c3") == 0)
-    {
+    } else if (strcmp(CONFIG_IDF_TARGET, "esp32c3") == 0) {
         dataPin = GPIO_NUM_5;
         enablePin = GPIO_NUM_10;
-    }
-    else if (strcmp(CONFIG_IDF_TARGET, "esp32c6") == 0)
-    {
+    } else if (strcmp(CONFIG_IDF_TARGET, "esp32c6") == 0) {
         dataPin = GPIO_NUM_2;
         enablePin = GPIO_NUM_21;
     }
 
-    if (dataPin == GPIO_NUM_NC)
-    {
+    if (dataPin == GPIO_NUM_NC) {
         ESP_LOGE(TAG, "No dataPin configured for Chip=%s", CONFIG_IDF_TARGET);
         return (false);
     }
 
     ESP_LOGI(TAG, "Chip=`%s`, using dataPin=%d", CONFIG_IDF_TARGET, dataPin);
-    if (enablePin != GPIO_NUM_NC)
-    {
+    if (enablePin != GPIO_NUM_NC) {
         ESP_LOGI(TAG, "Switching On enablePin=%d", enablePin);
         gpio_set_direction(enablePin, GPIO_MODE_OUTPUT);
         gpio_set_level(enablePin, 1);
-    }
-    else
-    {
+    } else {
         ESP_LOGI(TAG, "Optional enablePin is NOT configured");
     }
     return true;
@@ -90,10 +80,8 @@ bool setGPIO(void)
     Start the Neopixel ring
 -------------------------------------------------------------------------------
 */
-bool startNeopixelRing(void)
-{
-    if (!setGPIO())
-    {
+bool startNeopixelRing(void) {
+    if (!setGPIO()) {
         return (false);
     }
 
@@ -101,12 +89,9 @@ bool startNeopixelRing(void)
     npx.begin(PIXEL_COUNT, dataPin);
     //@@@TODO: error handling
 
-    if (npx.isRotatable())
-    {
+    if (npx.isRotatable()) {
         ESP_LOGI(TAG, "Neopixel ring is rotatable");
-    }
-    else
-    {
+    } else {
         ESP_LOGI(TAG, "Neopixel ring is NOT rotatable");
     }
 
@@ -121,8 +106,7 @@ bool startNeopixelRing(void)
     Show (log) the memory info
 -------------------------------------------------------------------------------
 */
-void showMemoryInfo(void)
-{
+void showMemoryInfo(void) {
     ESP_LOGI(TAG, "---Memory---");
     ESP_LOGI(TAG, "Free heap=%" PRIu32, esp_get_free_internal_heap_size());
     ESP_LOGI(TAG, "Largest free block=%" PRIu32, heap_caps_get_largest_free_block(MALLOC_CAP_INTERNAL));
@@ -134,8 +118,7 @@ void showMemoryInfo(void)
     Animate a moving pixel on the Neopixel ring
 -------------------------------------------------------------------------------
 */
-void movingPixel(void)
-{
+void movingPixel(void) {
     static int coloredIndex = 0;
     static int blackIndex = PIXEL_COUNT - 1;
 
@@ -145,8 +128,7 @@ void movingPixel(void)
 
     // Update the pixel indexes for the next iteration
     blackIndex = coloredIndex;
-    if (++coloredIndex >= PIXEL_COUNT)
-    {
+    if (++coloredIndex >= PIXEL_COUNT) {
         // New loop
         coloredIndex = 0;
     }
@@ -157,8 +139,7 @@ void movingPixel(void)
     Main
 ===============================================================================
 */
-extern "C" void app_main(void)
-{
+extern "C" void app_main(void) {
     vTaskDelay(5000 / portTICK_PERIOD_MS); // allow terminal to initialize
 
     printf("------------------------------\n");
@@ -168,17 +149,14 @@ extern "C" void app_main(void)
     startNeopixelRing();
     showMemoryInfo();
 
-    for (;;)
-    {
-        for (int i = 0; i < 3 * PIXEL_COUNT; i++)
-        {
+    for (;;) {
+        for (int i = 0; i < 3 * PIXEL_COUNT; i++) {
             movingPixel();
         }
 
         vTaskDelay(1000 / portTICK_PERIOD_MS); // delay for 1000 milliseconds between each pixel movement
 
-        for (int i = 0; i < 20; i++)
-        {
+        for (int i = 0; i < 20; i++) {
             npx.rotateLeft();
             npx.show();                           // send the rotated data to the Neopixel ring
             vTaskDelay(100 / portTICK_PERIOD_MS); // delay for 100 milliseconds between each rotation
@@ -186,8 +164,7 @@ extern "C" void app_main(void)
 
         vTaskDelay(1000 / portTICK_PERIOD_MS); // delay for 1000 milliseconds between each pixel movement
 
-        for (int i = 0; i < 20; i++)
-        {
+        for (int i = 0; i < 20; i++) {
             npx.rotateRight();
             npx.show();                           // send the rotated data to the Neopixel ring
             vTaskDelay(100 / portTICK_PERIOD_MS); // delay for 100 milliseconds between each rotation

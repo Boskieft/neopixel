@@ -3,7 +3,7 @@
 ***************************************************************************************************
     ESP32xx Neopixel Driver - I2S implementation
 
-    Copyright (c) 2026 Erik Basalt
+    Copyright (c) 2026 Erik Boskieft
     Released under the MIT License, see the LICENSE file for details.
 ***************************************************************************************************
 */

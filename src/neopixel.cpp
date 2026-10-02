@@ -2,7 +2,7 @@
 ***************************************************************************************************
     ESP32xx Neopixel Driver
 
-    Copyright (c) 2026 Erik Basalt
+    Copyright (c) 2026 Erik Boskieft. All rights reserved.
     Released under the MIT License, see the LICENSE file for details.
 ***************************************************************************************************
 */
@@ -120,12 +120,16 @@ void NeopixelDriver<Mode>::setPixel(
         //---------------------------------------
         //  Apply global brighness
         //---------------------------------------
-        if (pixel.color.r) pixel.color.r = (pixel.color.r * brightness) >> 8;
-        if (pixel.color.g) pixel.color.g = (pixel.color.g * brightness) >> 8;
-        if (pixel.color.b) pixel.color.b = (pixel.color.b * brightness) >> 8;
+        if (pixel.color.r)
+            pixel.color.r = (pixel.color.r * brightness) >> 8;
+        if (pixel.color.g)
+            pixel.color.g = (pixel.color.g * brightness) >> 8;
+        if (pixel.color.b)
+            pixel.color.b = (pixel.color.b * brightness) >> 8;
         if constexpr ((Mode == PixelType::GRBW_SEQ3) || (Mode == PixelType::GRBW_SEQ4)) {
             // Only when the Neopixels actually have a white component
-            if (pixel.color.w) pixel.color.w = (pixel.color.w * brightness) >> 8;
+            if (pixel.color.w)
+                pixel.color.w = (pixel.color.w * brightness) >> 8;
         }
     } // else: max brightness, no adjustment
 

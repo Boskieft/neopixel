@@ -3,11 +3,11 @@
 *****************************************************************************************
     Bitstream sequence for Neopixels that use 3 transmit bits ("seq3") per color bit.
 
+    Copyright (c) 2026 Erik Boskieft. All rights reserved.
+    This file is released under the MIT License. See the LICENSE file for details.
+
     Based on ws2812b_protocol.h and sk6812b_protocol.h from Zorxx Software,
     https://github.com/zorxx/neopixel, copyright 2023-2026, MIT License.
-
-    Copyright (c) 2026 Erik Basalt. All rights reserved.
-    This file is released under the MIT License. See the LICENSE file for details.
 *****************************************************************************************
 */
 #define NEOPIXEL_SEQ3_BYTES_PER_COLOR (3)                     // per definition for seq3

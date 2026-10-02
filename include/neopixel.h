@@ -3,7 +3,7 @@
 ***************************************************************************************************
     ESP32xx Neopixel Driver, header file
 
-    Copyright (c) 2026 Erik Basalt
+    Copyright (c) 2026 Erik Boskieft. All rights reserved.
     Released under the MIT License, see the LICENSE file for details.
 ***************************************************************************************************
 */

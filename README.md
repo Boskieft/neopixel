@@ -1,27 +1,29 @@
 # Neopixel driver for ESP32xx using I2S
 
-Low level driver for Neopixels, using I2S on ESP32xx chips.
+Reliable ESP32xx driver for Neopixels, using I2S with DMA.
+
 Features:
 
-- **ESP-IDF** No need for Arduino framework (but works perfectly fine with in)
-- **I2S**, using standard I2s driver of ESP-IDF 5.5:
+- **ESP32xx family:** Tested on ESP32, ESP32-S2, ESP32-S3, ESP32-C3 and ESP32-C6.
+- **ESP-IDF:** Works with and without the Arduino framework.
+- **I2S:**, using standard I2s driver of ESP-IDF 5.5:
   - DMA for minimal processor load
-  - Automatic optimal config
-- **RGB/RGBW** Configurable for RGB (3 colors) or RGBW (3 colors + white) Neopixels
-- **SEQ3/SEQ4** Configurable for best match on your Neopixel timing:
-  - 3 bit sequence, dutycycle: Off=33%, On=67%
-  - 4 bit sequence, dutycycle: Off=25%, On=50%
-- **1...N** drives 1 upto many thousants of Neopixels, only limited by the available RAM
-- **Single buffer** no unneccesary copy, saving RAM memory
-- **Fast**, driver waits for transmission completion in seperate task
-- **Rotate** fast
-- **Fill** fast
-- **logging** via standard ESP_LOGx(), activate Debug for more
-- **Statistics** on timing and errors
+  - Optimal DMA config
+- **RGB/RGBW:** Configurable for RGB (3 colors) or RGBW (3 colors + white) Neopixels.
+- **SEQ3/SEQ4:** Configurable for best match on your Neopixel's timing:
+  - 3 bit sequence, period=1200ns, dutycycle: Off=33%, On=67%
+  - 4 bit sequence, period=1200ns, dutycycle: Off=25%, On=50%
+- **1...N:** drives 1 upto many thousants of Neopixels, only limited by the available RAM.
+- **Single buffer:** no unneccesary copy, saving RAM memory.
+- **Fast:** driver waits for transmission completion in seperate task.
+- **Rotate:** in-memory left or right rotation
+- **Fill:** in-memory color filling for a range of Neopixels (or all of them)
+- **Logging:** via standard ESP_LOGx(), activate Debug for more
+- **Statistics:** on timing and errors
 
 ## Tested ESP32xx devices
 
-@@@@@
+Tested successfully on the ESP32xx devices listed below.
 
 | ESP32xx module           | Free heap | Largest free block | Loops/sec |
 |:-------------------------|:---------:|:------------------:|:---------:|
@@ -33,9 +35,6 @@ Features:
 
 > It's unclear why the "Largest free block" of ESP32 and ESP32-C3 is relatively small.  
 Also checked directly after startup: same picture, so not due to the application.
->
-> I do have an ESP32-S2, but I cannot get the console logging to work.  
-Have seen this before, also at others. Giving up for now.
 
 ## Build environment
 
@@ -51,7 +50,7 @@ Visual Studio Code (VSC), latest version (currently 1.131.0), with next Extensio
 - ESP Crash Decoder
 - GitHub Repositories
 - markdownlint (eg for this file)
-- pioarduino IDE
+- ESP-IDF -or- pioarduino IDE
 - Prettier - Code formatter
 - Prettier-Standard - JavaScript formatter
 - Python
