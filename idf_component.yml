@@ -1,0 +1,16 @@
+version: "0.1.0"
+description: "Neopixel driver for ESP32xx devices using I2S"
+url: "https://github.com/Boskieft/neopixel"
+repository: "https://github.com/Boskieft/neopixel.git"
+license: "MIT"
+tags:
+  - neopixel
+  - led
+  - ws2812b
+  - ws2812
+  - sk6812b
+  - sk6812
+  - esp32xx
+  - i2s
+  - dma
+  
