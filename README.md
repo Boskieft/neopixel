@@ -6,20 +6,21 @@ Features:
 
 - **ESP32xx family:** Tested on ESP32, ESP32-S2, ESP32-S3, ESP32-C3 and ESP32-C6.
 - **ESP-IDF:** Works with and without the Arduino framework.
-- **I2S:**, using standard I2s driver of ESP-IDF 5.5:
+- **I2S:** Using standard I2s driver of ESP-IDF 5.5:
   - DMA for minimal processor load
   - Optimal DMA config
 - **RGB/RGBW:** Configurable for RGB (3 colors) or RGBW (3 colors + white) Neopixels.
 - **SEQ3/SEQ4:** Configurable for best match on your Neopixel's timing:
   - 3 bit sequence, period=1200ns, dutycycle: Off=33%, On=67%
   - 4 bit sequence, period=1200ns, dutycycle: Off=25%, On=50%
-- **1...N:** drives 1 upto many thousants of Neopixels, only limited by the available RAM.
-- **Single buffer:** no unneccesary copy, saving RAM memory.
-- **Fast:** driver waits for transmission completion in seperate task.
-- **Rotate:** in-memory left or right rotation
-- **Fill:** in-memory color filling for a range of Neopixels (or all of them)
-- **Logging:** via standard ESP_LOGx(), activate Debug for more
-- **Statistics:** on timing and errors
+- **1...N:** Drives 1 upto many thousants of Neopixels, only limited by the available RAM.
+- **Single buffer:** No unneccesary copy, saving RAM memory.
+- **Fast calls:** Driver waits for transmission completion in seperate task.
+- **Easy:** No polling, no throttling, the driver takes care.
+- **Rotate:** In-memory left or right rotation
+- **Fill:** In-memory color filling for a range of Neopixels (or all of them)
+- **Logging:** Iia standard ESP_LOGx(), activate Debug for more
+- **Statistics:** On timing and errors
 
 ## Tested ESP32xx devices
 
