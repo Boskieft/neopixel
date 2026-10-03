@@ -14,10 +14,8 @@
 // Use a separate RTOS Task to control the I2S transmission (mainly by enable/disable the I2S channel)
 #define ENABLE_I2S_TASK_VERSION 1
 
-#define NEOPIXEL_ENABLE_OUTPUT_EVERY_WRITE 1
-
 #if (SOC_I2S_HW_VERSION_1)
-// NOTE: !! VSC is not aware of this define, therefore syntax highlighting does NOT work here !!
+// NOTE: !! VSC is not aware of this ESP32xx define, therefore syntax highlighting does NOT work here !!
 
 //-------------------------------------------------------------------
 // SOC_I2S_HW_VERSION_1 chip (the original ESP32 and ESP32-S2)
