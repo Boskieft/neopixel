@@ -2,63 +2,48 @@
 
 Reliable ESP32xx driver for Neopixels, using I2S with DMA.
 
+This driver supports addressable RGB/RGBW LEDs using WS2812x / SK6812x compatible signaling, including Adafruit NeoPixel products and compatible LEDs from other manufacturers.
+
 Features:
 
-- **ESP32xx family:** Tested on ESP32, ESP32-S2, ESP32-S3, ESP32-C3 and ESP32-C6.
+- **ESP32xx family:** Tested on 5 ESP32xx variants (see paragraph below).
 - **ESP-IDF:** Works with and without the Arduino framework.
 - **I2S:** Using standard I2s driver of ESP-IDF 5.5:
-  - DMA for minimal processor load
-  - Optimal DMA config
-- **RGB/RGBW:** Configurable for RGB (3 colors) or RGBW (3 colors + white) Neopixels.
+  - DMA for minimal processor load and interrupts
+  - Keeps SPI with DMA avaialble for other purposes
+- **GRB/GRBW:** Configurable for GRB (3 colors) or GRBW (3 colors + white) Neopixels.
 - **SEQ3/SEQ4:** Configurable for best match on your Neopixel's timing:
   - 3 bit sequence, period=1200ns, dutycycle: Off=33%, On=67%
   - 4 bit sequence, period=1200ns, dutycycle: Off=25%, On=50%
 - **1...N:** Drives 1 upto many thousants of Neopixels, only limited by the available RAM.
-- **Single buffer:** No unneccesary copy, saving RAM memory.
-- **Fast calls:** Driver waits for transmission completion in seperate task.
+- **Fast:** Driver waits for transmission completion in seperate task.
 - **Easy:** No polling, no throttling, the driver takes care.
 - **Rotate:** In-memory left or right rotation
 - **Fill:** In-memory color filling for a range of Neopixels (or all of them)
-- **Logging:** Iia standard ESP_LOGx(), activate Debug for more
+- **Logging:** Using standard ESP_LOGx(), activate Debug for more
 - **Statistics:** On timing and errors
 
 ## Tested ESP32xx devices
 
 Tested successfully on the ESP32xx devices listed below.
 
-| ESP32xx module           | Free heap | Largest free block | Loops/sec |
-|:-------------------------|:---------:|:------------------:|:---------:|
-| ESP32 (D1 mini)          | 226960    | 110580             | 38200     |
-| ESP32-C3 (Mini Pro)      | 195920    | 114676             | 61900     |
-| ESP32-C6 (Seeed)         | 314428    | 294900             | 56300     |
-| ESP32-S2 (Wemos S2 Mini) | -         | -                  | -         |
-| ESP32-S3 (Lilygo T7)     | 258796    | 217076             | 54400     |
+- ESP32 (D1 mini)
+- ESP32-S2 (Wemos S2 Mini)
+- ESP32-S3 (Lilygo T7)
+- ESP32-C3 (Mini Pro)
+- ESP32-C6 (Seeed)
 
-> It's unclear why the "Largest free block" of ESP32 and ESP32-C3 is relatively small.  
-Also checked directly after startup: same picture, so not due to the application.
+## Speed and RAM memory
+
+@@@TODO: describe typical show() response time
+@@@TODO: describe typical overall transmission time (or repetition rate) for 1, 10, 100 and 1000 Neopixels
+
+@@@TODO: describe buffer and DMA sizes for 1, 10, 100 and 1000 Neopixels
 
 ## Build environment
 
-Visual Studio Code (VSC), latest version (currently 1.131.0), with next Extensions:
+@@@TODO: briefly describe: ESP-IDF, pioarduino and Arduino
 
-- C/C++ and CMake extensions:
-  - C/C++
-  - C/C++ DevTools
-  - C/C++ Extension Pack
-  - C/C++ Themes
-  - CMake
-  - CMake Tools
-- ESP Crash Decoder
-- GitHub Repositories
-- markdownlint (eg for this file)
-- ESP-IDF -or- pioarduino IDE
-- Prettier - Code formatter
-- Prettier-Standard - JavaScript formatter
-- Python
-- Python Debugger
-- Python Environments
+## Examples and Documentation
 
-GitLens -  Git supercharged, free ("Community") edition.  
-In Settings I switched Off `[_]` the "Plus Features enabled" to avoid getting nagged about upgrading to Pro.  
-
-Git for Windows, latest x64 version (currently 2.55.0) from [Git](https://www.git-scm.com)
+Please refer to the "examples" and "docs" folders in this driver.
